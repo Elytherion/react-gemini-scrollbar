@@ -25,6 +25,7 @@
     "gemini-scrollbar": "^1.4.2"
   },
   "peerDependencies": {
+    "prop-types": "^15.5.10",
     "react": "^0.14.0 || ^15.0.0",
     "react-dom": "^0.14.0 || ^15.0.0"
   },

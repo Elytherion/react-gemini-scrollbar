@@ -1,30 +1,16 @@
+var PropTypes = require('prop-types');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var GeminiScrollbar = require('gemini-scrollbar');
 
-module.exports = React.createClass({
-    displayName: 'GeminiScrollbar',
-
-    propTypes: {
-        autoshow: React.PropTypes.bool,
-        forceGemini: React.PropTypes.bool,
-        onResize: React.PropTypes.func,
-        minThumbSize: React.PropTypes.number
-    },
-
-    getDefaultProps() {
-        return {
-            autoshow: false,
-            forceGemini: false,
-            minThumbSize: 20
-        }
-    },
-
-    /**
-     * Holds the reference to the GeminiScrollbar instance.
-     * @property scrollbar <public> [Object]
-     */
-    scrollbar: null,
+class ReactGeminiScrollbar extends React.Component {
+    constructor() {
+        /**
+         * Holds the reference to the GeminiScrollbar instance.
+         * @property scrollbar <public> [Object]
+         */
+        this.scrollbar = null;
+    }
 
     componentDidMount() {
         this.scrollbar = new GeminiScrollbar({
@@ -35,18 +21,18 @@ module.exports = React.createClass({
             onResize: this.props.onResize,
             minThumbSize: this.props.minThumbSize
         }).create();
-    },
+    }
 
     componentDidUpdate() {
         this.scrollbar.update();
-    },
+    }
 
     componentWillUnmount() {
         if (this.scrollbar) {
             this.scrollbar.destroy();
         }
         this.scrollbar = null;
-    },
+    }
 
     render() {
         var {className, children, autoshow, forceGemini, onResize, minThumbSize, ...other} = this.props,
@@ -70,4 +56,19 @@ module.exports = React.createClass({
             </div>
         );
     }
-});
+}
+
+ReactGeminiScrollbar.propTypes = {
+    autoshow: PropTypes.bool,
+    forceGemini: PropTypes.bool,
+    onResize: PropTypes.func,
+    minThumbSize: PropTypes.number
+}
+
+ReactGeminiScrollbar.defaultProps = {
+    autoshow: false,
+    forceGemini: false,
+    minThumbSize: 20
+}
+
+module.exports = ReactGeminiScrollbar;
